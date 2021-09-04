@@ -5,6 +5,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.foodshop.databinding.ActivityMainBinding
 import com.example.foodshop.fragment.MenuFragment
+import com.example.foodshop.fragment.ShoppingCartFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -15,18 +16,14 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         if (savedInstanceState == null) openMenuFragment()
-        binding.bottomNavigationView.background = null
-        binding.bottomNavigationView.menu.getItem(2).isEnabled = false
 
-        binding.cart.setOnClickListener(){
-            openCartFragment()
-        }
         binding.bottomNavigationView.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.menu -> openMenuFragment()
                 R.id.offers -> openOffersFragment()
                 R.id.coupons -> openCouponsFragment()
-               R.id.account -> openAccountFragment()
+                R.id.account -> openAccountFragment()
+                R.id.cart -> openCartFragment()
             }
             true
         }
@@ -49,11 +46,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun openCartFragment() {
-        Toast.makeText(
-            this,
-            "CartFragment :3",
-            Toast.LENGTH_LONG
-        ).show()
+        val recyclerFragment = ShoppingCartFragment()
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(binding.fContainerView.id, recyclerFragment).commit()
     }
 
     private fun openOffersFragment() {
@@ -67,7 +62,11 @@ class MainActivity : AppCompatActivity() {
     private fun openMenuFragment() {
         val recyclerFragment = MenuFragment()
         val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(binding.fContainerView.id , recyclerFragment).commit()
+        transaction.replace(binding.fContainerView.id, recyclerFragment).commit()
+    }
+
+    fun changeTitle(title:String){
+        binding.toolbar.title = title
     }
 
 

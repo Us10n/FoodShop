@@ -8,12 +8,13 @@
 
     <item
         android:id="@+id/offers"
-        android:icon="@drawable/ic_baseline_local_offer_24"
+        android:icon="@drawable/ic_baseline_star_24"
         android:title="Offers" />
 
     <item
-        android:id="@+id/blank"
-        android:title="" />
+        android:id="@+id/cart"
+        android:icon="@drawable/ic_baseline_shopping_cart_24"
+        android:title="cart" />
 
     <item
         android:id="@+id/coupons"

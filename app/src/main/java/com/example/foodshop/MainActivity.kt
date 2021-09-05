@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.foodshop.databinding.ActivityMainBinding
+import com.example.foodshop.fragment.AccountFragment
 import com.example.foodshop.fragment.MenuFragment
 import com.example.foodshop.fragment.ShoppingCartFragment
 
@@ -30,11 +31,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun openAccountFragment() {
-        Toast.makeText(
-            this,
-            "AccountFragment :3",
-            Toast.LENGTH_LONG
-        ).show()
+        binding.fContainerView.findFocus().id
+        val recyclerFragment= AccountFragment()
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(binding.fContainerView.id, recyclerFragment).commit()
     }
 
     private fun openCouponsFragment() {

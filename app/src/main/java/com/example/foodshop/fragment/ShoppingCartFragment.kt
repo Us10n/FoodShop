@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.foodshop.MainActivity
 import com.example.foodshop.ShavaHolder
 import com.example.foodshop.databinding.FragmentCartBinding
-import com.example.foodshop.recycler.MenuAdapter
+import com.example.foodshop.adapters.MenuAdapter
 
 class ShoppingCartFragment : Fragment() {
 

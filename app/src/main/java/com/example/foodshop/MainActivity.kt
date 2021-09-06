@@ -31,8 +31,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun openAccountFragment() {
-        binding.fContainerView.findFocus().id
-        val recyclerFragment= AccountFragment()
+        val recyclerFragment = AccountFragment()
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(binding.fContainerView.id, recyclerFragment).commit()
     }
@@ -65,8 +64,8 @@ class MainActivity : AppCompatActivity() {
         transaction.replace(binding.fContainerView.id, recyclerFragment).commit()
     }
 
-    fun changeTitle(title:String){
-        binding.toolbar.title = title
+    fun changeTitle(title: String) {
+        binding.title.text = title
     }
 
 

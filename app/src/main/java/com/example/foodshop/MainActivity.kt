@@ -1,5 +1,6 @@
 package com.example.foodshop
 
+import android.app.Application
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -68,5 +69,8 @@ class MainActivity : AppCompatActivity() {
         binding.title.text = title
     }
 
+    fun getMyApplication(): Application? {
+        return application
+    }
 
 }

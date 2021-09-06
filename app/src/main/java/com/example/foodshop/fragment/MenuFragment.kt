@@ -4,22 +4,29 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.foodshop.MainActivity
+import com.example.foodshop.ShavaApplication
 import com.example.foodshop.ShavaHolder
+import com.example.foodshop.ShavaListener
 import com.example.foodshop.databinding.FragmentMenuBinding
 import com.example.foodshop.adapters.MenuAdapter
 import com.example.foodshop.recycler.MenuPosition
 import com.example.foodshop.adapters.MenuPositionAdapter
 
-class MenuFragment : Fragment() {
+class MenuFragment : Fragment(), ShavaListener {
 
+    private val viewModel:MenuFragmentViewModel by viewModels {
+        ViewModelFactory(((activity as MainActivity).getMyApplication() as ShavaApplication).repository)
+    }
     private val holder = ShavaHolder
     private lateinit var binding: FragmentMenuBinding
     private val menuAdapter = MenuAdapter()
-    private val menuPositionAdapter = MenuPositionAdapter(holder)
+    private val menuPositionAdapter = MenuPositionAdapter(holder, this)
     private val list = mutableListOf<MenuPosition>()
 
 
@@ -54,5 +61,9 @@ class MenuFragment : Fragment() {
         menuAdapter.submitList(list)
         menuPositionAdapter.submitList(list)
 
+    }
+
+    override fun loadImage(url: String, view: ImageView) {
+        viewModel.loadImage(url,view)
     }
 }

@@ -15,7 +15,7 @@ The application is based on MVVM architecture. This architecture was suggested a
 - Kotlin
 - Android Jetpack
 - SQL
-- 
+- Picasso
 
 ## Requirements
 - Interface language: English.
@@ -27,7 +27,8 @@ functions:
   - Authorization and registration of an account
   - Account editing
   - Creating and editing orders
+  - Order history
   - Product fast search
   - Special offers and Coupons menu
-  - Money-back system
+  - Bonus system
 

@@ -1,6 +1,8 @@
 package com.example.foodshop.recycler
 
-import android.graphics.Bitmap
-
-data class MenuPosition(var name:String){
+data class MenuPosition(
+    var id: Long=0,
+    var name:String="0",
+    var imgUrl: String="0",
+    var description: String="0"){
 }

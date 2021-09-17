@@ -10,13 +10,14 @@ import androidx.fragment.app.viewModels
 import com.example.foodshop.MainActivity
 import com.example.foodshop.ShavaApplication
 import com.example.foodshop.adapters.AccountTabAdapter
-import com.example.foodshop.database.Database
 import com.example.foodshop.databinding.FragmentAccountBinding
+import com.example.foodshop.viewmodel.AccountFragmentViewModel
+import com.example.foodshop.viewmodel.ViewModelFactory
 import com.google.android.material.tabs.TabLayoutMediator
 
 class AccountFragment : Fragment() {
 
-    private val viewModel:AccountFragmentViewModel by viewModels {
+    private val viewModel: AccountFragmentViewModel by viewModels {
         ViewModelFactory(((activity as MainActivity).getMyApplication() as ShavaApplication).repository)
     }
     lateinit var binding: FragmentAccountBinding
@@ -26,23 +27,13 @@ class AccountFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentAccountBinding.inflate(inflater)
+        binding.vPager.adapter= AccountTabAdapter(activity as FragmentActivity)
         viewModel.loadImage(
             "https://firebasestorage.googleapis.com/v0/b/test-4c0c2.appspot.com/o/imgs%2Ftest1.png?alt=media&token=6c3bfcbd-d8f2-4d63-aae9-34d6d84ef468",
             binding.accimage
         )
 
-        binding.vPager.adapter= AccountTabAdapter(activity as FragmentActivity)
-
-        TabLayoutMediator(binding.tabLayout, binding.vPager) { tab, position ->
-            when (position) {
-                0 -> {
-                    tab.text = "Returns"
-                }
-                1 -> {
-                    tab.text = "Order History"
-                }
-            }
-        }.attach()
+        viewModel.initTabMediator(binding.tabLayout, binding.vPager)
 
         return binding.root
     }

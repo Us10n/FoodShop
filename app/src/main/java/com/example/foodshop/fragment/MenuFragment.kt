@@ -13,14 +13,16 @@ import com.example.foodshop.MainActivity
 import com.example.foodshop.ShavaApplication
 import com.example.foodshop.ShavaHolder
 import com.example.foodshop.ShavaListener
-import com.example.foodshop.databinding.FragmentMenuBinding
 import com.example.foodshop.adapters.MenuAdapter
-import com.example.foodshop.recycler.MenuPosition
 import com.example.foodshop.adapters.MenuPositionAdapter
+import com.example.foodshop.databinding.FragmentMenuBinding
+import com.example.foodshop.recycler.MenuPosition
+import com.example.foodshop.viewmodel.MenuFragmentViewModel
+import com.example.foodshop.viewmodel.ViewModelFactory
 
 class MenuFragment : Fragment(), ShavaListener {
 
-    private val viewModel:MenuFragmentViewModel by viewModels {
+    private val viewModel: MenuFragmentViewModel by viewModels {
         ViewModelFactory(((activity as MainActivity).getMyApplication() as ShavaApplication).repository)
     }
     private val holder = ShavaHolder
@@ -51,19 +53,17 @@ class MenuFragment : Fragment(), ShavaListener {
         val mainActivity = activity as MainActivity
         mainActivity.changeTitle("Menu")
 
+        //test add position in menu
+        for(i in 0..4){
 
-        list.add(
-            MenuPosition("Shava 1")
-        )
-        list.add(MenuPosition("Shava 2"))
-        list.add(MenuPosition("Shava 3"))
-        list.add(MenuPosition("Shava 4"))
+            list.add(MenuPosition(i.toLong(),"Shava"+i,"","Wow"))
+        }
+
         menuAdapter.submitList(list)
         menuPositionAdapter.submitList(list)
-
     }
 
     override fun loadImage(url: String, view: ImageView) {
-        viewModel.loadImage(url,view)
+        viewModel.loadPosition(url,view)
     }
 }

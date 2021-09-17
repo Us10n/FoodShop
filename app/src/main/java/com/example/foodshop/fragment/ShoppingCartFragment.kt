@@ -16,6 +16,7 @@ class ShoppingCartFragment : Fragment() {
     private lateinit var binding: FragmentCartBinding
     private val holder = ShavaHolder
     private val orderAdapter = MenuAdapter()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

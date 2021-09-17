@@ -4,24 +4,24 @@
     <item
         android:id="@+id/menu"
         android:icon="@drawable/ic_baseline_restaurant_menu_24"
-        android:title="Menu" />
+        android:title="@string/menu" />
 
     <item
         android:id="@+id/offers"
         android:icon="@drawable/ic_baseline_star_24"
-        android:title="Offers" />
+        android:title="@string/offers" />
 
     <item
         android:id="@+id/cart"
         android:icon="@drawable/ic_baseline_shopping_cart_24"
-        android:title="cart" />
+        android:title="@string/cart" />
 
     <item
         android:id="@+id/coupons"
         android:icon="@drawable/ic_baseline_local_offer_24"
-        android:title="Coupons"/>
+        android:title="@string/coupons"/>
     <item
         android:id="@+id/account"
         android:icon="@drawable/ic_baseline_account_circle_24"
-        android:title="Account" />
+        android:title="@string/account" />
 </menu>

@@ -23,6 +23,4 @@ class AccountTabAdapter(fragment: FragmentActivity) :
             }
         }
     }
-
-
 }

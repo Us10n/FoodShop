@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.foodshop.databinding.ActivityMainBinding
 import com.example.foodshop.fragment.AccountFragment
 import com.example.foodshop.fragment.MenuFragment
+import com.example.foodshop.fragment.OffersFragment
 import com.example.foodshop.fragment.ShoppingCartFragment
 
 class MainActivity : AppCompatActivity() {
@@ -52,11 +53,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun openOffersFragment() {
-        Toast.makeText(
-            this,
-            "OffersFragment :3",
-            Toast.LENGTH_LONG
-        ).show()
+        val recyclerFragment = OffersFragment()
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(binding.fContainerView.id, recyclerFragment).commit()
     }
 
     private fun openMenuFragment() {

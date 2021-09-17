@@ -18,6 +18,4 @@ class MenuAdapter: ListAdapter<MenuPosition, MenuViewHolder>(MenuDiffCallback())
     override fun onBindViewHolder(holder: MenuViewHolder, position: Int) {
         getItem(position)?.let { holder.bind(it) }
     }
-
-
 }

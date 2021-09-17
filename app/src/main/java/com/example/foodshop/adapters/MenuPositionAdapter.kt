@@ -23,6 +23,4 @@ class MenuPositionAdapter(private val holder: ShavaHolder, private val listener:
     override fun onBindViewHolder(holder: MenuPositionViewHolder, position: Int) {
         getItem(position)?.let { holder.bind(it, listener) }
     }
-
-
 }

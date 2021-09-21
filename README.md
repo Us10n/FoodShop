@@ -16,6 +16,7 @@ The application is based on MVVM architecture. This architecture was suggested a
 - Android Jetpack
 - SQL
 - Picasso
+- Firebase
 
 ## Requirements
 - Interface language: English.

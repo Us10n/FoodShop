@@ -8,5 +8,6 @@
     <string name="cart">Cart</string>
     <string name="coupons">Coupons</string>
     <string name="account">Account</string>
+    <string name="add_cart">Add to cart</string>
 
 </resources>

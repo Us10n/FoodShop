@@ -16,6 +16,6 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         tools:ignore="NotSibling"
-        tools:listitem="@layout/item" />
+        tools:listitem="@layout/cart_position" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

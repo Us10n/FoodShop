@@ -1,12 +1,14 @@
 package com.example.foodshop.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.foodshop.MainActivity
@@ -42,7 +44,8 @@ class MenuFragment : Fragment(), ShavaListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.recyclerForDescounts.apply {
+
+        binding.recyclerForDiscounts.apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             adapter = menuAdapter
         }
@@ -50,17 +53,20 @@ class MenuFragment : Fragment(), ShavaListener {
             layoutManager = GridLayoutManager(context, 2)
             adapter = menuPositionAdapter
         }
-        val mainActivity = activity as MainActivity
-        mainActivity.changeTitle("Menu")
 
-        //test add position in menu
-        for(i in 0..4){
+        viewModel.positions.observe(viewLifecycleOwner,
+            Observer { positions ->
+                run {
+                    var tmp = viewModel.positions.value;
+                    Log.d("mine2", tmp.toString())
+                    menuAdapter.submitList(viewModel.positions.value)
+                    menuPositionAdapter.submitList(viewModel.positions.value)
+                }
 
-            list.add(MenuPosition(i.toLong(),"Shava"+i,"","Wow"))
-        }
+            })
 
-        menuAdapter.submitList(list)
-        menuPositionAdapter.submitList(list)
+
+        viewModel.loadMenuPositions()
     }
 
     override fun loadImage(url: String, view: ImageView) {

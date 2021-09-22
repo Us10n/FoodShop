@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import com.example.foodshop.MainActivity
 import com.example.foodshop.ShavaApplication
 import com.example.foodshop.databinding.FragmentOffersBinding
@@ -27,12 +28,22 @@ class OffersFragment : Fragment() {
     ): View? {
         binding = FragmentOffersBinding.inflate(inflater)
         binding.btnGet.setOnClickListener {
-            var tmp=viewModel.loadMenuPositions();
-            Log.d("mine1", tmp.toString())
+            viewModel.loadMenuPositions();
+            Log.d("mine1", "load call")
         }
         binding.btnSend.setOnClickListener {
             viewModel.uploadMenuPosition(MenuPosition(1, "kek", "url", "plus"))
         }
+
+        viewModel.positions.observe(viewLifecycleOwner,
+            Observer { positions ->
+                run {
+                    var tmp = viewModel.positions.value;
+                    Log.d("mine2", tmp.toString())
+                }
+
+            })
+
         return binding.root
     }
 

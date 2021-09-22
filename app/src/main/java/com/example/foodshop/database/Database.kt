@@ -3,6 +3,7 @@ package com.example.foodshop.database
 import android.util.Log
 import android.widget.ImageView
 import com.example.foodshop.Exception
+import com.example.foodshop.MyCallBack
 import com.example.foodshop.recycler.MenuPosition
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.toObject
@@ -29,7 +30,7 @@ class Database {
             }
     }
 
-    suspend fun loadMenuPositions(): List<MenuPosition> {
+    suspend fun loadMenuPositions(myCallBack: MyCallBack): List<MenuPosition> {
         var list = mutableListOf<MenuPosition>()
         val db = FirebaseFirestore.getInstance()
         db.collection("shaurma")
@@ -42,6 +43,7 @@ class Database {
                     )
                     list.add(document.toObject<MenuPosition>()!!);
                 }
+                myCallBack.onCallback(list)
             }
             .addOnFailureListener {
                 Log.d("mine", "Error get")

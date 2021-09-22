@@ -2,13 +2,10 @@ package com.example.foodshop.viewmodel
 
 import android.widget.ImageView
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import androidx.viewpager2.widget.ViewPager2
 import com.example.foodshop.Repository
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 class AccountFragmentViewModel(private val repository: Repository) : ViewModel() {
     fun loadImage(url: String, view: ImageView) {

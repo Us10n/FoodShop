@@ -13,7 +13,6 @@ import com.example.foodshop.adapters.AccountTabAdapter
 import com.example.foodshop.databinding.FragmentAccountBinding
 import com.example.foodshop.viewmodel.AccountFragmentViewModel
 import com.example.foodshop.viewmodel.ViewModelFactory
-import com.google.android.material.tabs.TabLayoutMediator
 
 class AccountFragment : Fragment() {
 

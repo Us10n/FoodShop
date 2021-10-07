@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.foodshop.MainActivity
 import com.example.foodshop.ShavaHolder
+import com.example.foodshop.adapters.CartAdapter
 import com.example.foodshop.databinding.FragmentCartBinding
 import com.example.foodshop.adapters.MenuAdapter
 
@@ -15,7 +16,7 @@ class ShoppingCartFragment : Fragment() {
 
     private lateinit var binding: FragmentCartBinding
     private val holder = ShavaHolder
-    private val orderAdapter = MenuAdapter()
+    private val orderAdapter = CartAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,7 +34,7 @@ class ShoppingCartFragment : Fragment() {
             layoutManager = LinearLayoutManager(context)
             adapter = orderAdapter
         }
-        orderAdapter.submitList(holder.getList())
+        orderAdapter.submitList(holder.getSpecialList())
     }
 
 }

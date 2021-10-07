@@ -11,7 +11,7 @@ class Repository {
         database.loadImgByUrl(url, view)
     }
 
-    suspend fun loadMenuPostions(myCallBack: MyCallBack): List<MenuPosition> {
+    suspend fun loadMenuPositions(myCallBack: MyCallBack): List<MenuPosition> {
         return database.loadMenuPositions(myCallBack);
     }
 

@@ -20,16 +20,12 @@ class MenuFragmentViewModel(private val repository: Repository) : ViewModel() {
 
     fun loadMenuPositions() {
         viewModelScope.launch(Dispatchers.IO) {
-            repository.loadMenuPostions(object : MyCallBack {
+            repository.loadMenuPositions(object : MyCallBack {
                 override fun onCallback(positionsList: List<MenuPosition>) {
                     liveMenu.value = positionsList
                 }
             })
         }
-    }
-
-    fun showMenuPositions(){
-
     }
 
     fun loadPosition(url: String, view: ImageView) {

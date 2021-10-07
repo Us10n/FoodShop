@@ -14,10 +14,12 @@ class Database {
     fun loadImgByUrl(url: String, view: ImageView) {
         Picasso.get()
             .load(url)
+            .resize(view.maxWidth,view.maxHeight)
+            .centerCrop()
             .into(view)
     }
 
-    suspend fun uploadMenuPosition(item: MenuPosition) {
+    fun uploadMenuPosition(item: MenuPosition) {
         val db = FirebaseFirestore.getInstance()
         db.collection("shaurma")
             .add(item)
@@ -30,7 +32,7 @@ class Database {
             }
     }
 
-    suspend fun loadMenuPositions(myCallBack: MyCallBack): List<MenuPosition> {
+    fun loadMenuPositions(myCallBack: MyCallBack): List<MenuPosition> {
         var list = mutableListOf<MenuPosition>()
         val db = FirebaseFirestore.getInstance()
         db.collection("shaurma")

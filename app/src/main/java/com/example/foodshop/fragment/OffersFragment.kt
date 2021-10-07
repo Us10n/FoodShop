@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.example.foodshop.MainActivity
 import com.example.foodshop.ShavaApplication
+import com.example.foodshop.database.Database
 import com.example.foodshop.databinding.FragmentOffersBinding
 import com.example.foodshop.recycler.MenuPosition
 import com.example.foodshop.viewmodel.OffersFragmentViewModel

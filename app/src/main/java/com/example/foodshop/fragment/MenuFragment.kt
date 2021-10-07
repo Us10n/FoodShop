@@ -31,8 +31,6 @@ class MenuFragment : Fragment(), ShavaListener {
     private lateinit var binding: FragmentMenuBinding
     private val menuAdapter = MenuAdapter()
     private val menuPositionAdapter = MenuPositionAdapter(holder, this)
-    private val list = mutableListOf<MenuPosition>()
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

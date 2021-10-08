@@ -9,6 +9,7 @@
     android:layout_marginTop="8dp"
     android:layout_marginEnd="16dp"
     android:layout_marginBottom="8dp"
+    android:backgroundTint="@color/white"
     app:cardCornerRadius="7dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -20,15 +21,15 @@
             android:id="@+id/shaurmaimg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:srcCompat="@tools:sample/avatars"
-            android:scaleType="centerCrop"
-            android:minWidth="170dp"
-            android:minHeight="170dp"
             android:maxWidth="170dp"
             android:maxHeight="170dp"
-            app:layout_constraintTop_toTopOf="parent"
+            android:minWidth="170dp"
+            android:minHeight="170dp"
+            android:scaleType="centerCrop"
             app:layout_constraintBottom_toTopOf="@id/addToCart"
-            app:layout_constraintLeft_toLeftOf="parent"/>
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@tools:sample/avatars" />
 
         <Button
             android:id="@+id/addToCart"
@@ -39,12 +40,12 @@
             android:layout_marginEnd="2dp"
             android:layout_marginRight="2dp"
             android:text="@string/add_cart"
+            android:textColor="@color/lightYellow"
             android:textSize="12dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/shaurmaimg"
-            android:backgroundTint="@color/lightOrange" />
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/shaurmaimg" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

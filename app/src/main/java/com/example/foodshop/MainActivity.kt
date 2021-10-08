@@ -5,10 +5,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.foodshop.databinding.ActivityMainBinding
-import com.example.foodshop.fragment.AccountFragment
-import com.example.foodshop.fragment.MenuFragment
-import com.example.foodshop.fragment.OffersFragment
-import com.example.foodshop.fragment.ShoppingCartFragment
+import com.example.foodshop.fragment.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -18,54 +15,18 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        if (savedInstanceState == null) openMenuFragment()
-
-        binding.bottomNavigationView.setOnItemSelectedListener {
-            when (it.itemId) {
-                R.id.menu -> openMenuFragment()
-                R.id.offers -> openOffersFragment()
-                R.id.coupons -> openCouponsFragment()
-                R.id.account -> openAccountFragment()
-                R.id.cart -> openCartFragment()
-            }
-            true
-        }
+        if (savedInstanceState == null) openRegistrationFragment()
     }
 
-    private fun openAccountFragment() {
-        val recyclerFragment = AccountFragment()
+    private fun openRegistrationFragment() {
         val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(binding.fContainerView.id, recyclerFragment).commit()
+        transaction.replace(binding.fContainerView.id, RegistrationFragment()).commit()
     }
 
-    private fun openCouponsFragment() {
-        Toast.makeText(
-            this,
-            "CouponsFragment :3",
-            Toast.LENGTH_LONG
-        ).show()
-    }
-
-    private fun openCartFragment() {
-        val recyclerFragment = ShoppingCartFragment()
+    fun openMainFragment() {
+        val mainFragment = MainFragment()
         val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(binding.fContainerView.id, recyclerFragment).commit()
-    }
-
-    private fun openOffersFragment() {
-        val recyclerFragment = OffersFragment()
-        val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(binding.fContainerView.id, recyclerFragment).commit()
-    }
-
-    private fun openMenuFragment() {
-        val recyclerFragment = MenuFragment()
-        val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(binding.fContainerView.id, recyclerFragment).commit()
-    }
-
-    fun changeTitle(title: String) {
-        binding.title.text = title
+        transaction.replace(binding.fContainerView.id, mainFragment).commit()
     }
 
     fun getMyApplication(): Application? {

@@ -46,16 +46,16 @@ class MenuFragment : Fragment(), ShavaListener {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             adapter = menuAdapter
         }
+
         binding.recyclerForMenu.apply {
             layoutManager = GridLayoutManager(context, 2)
             adapter = menuPositionAdapter
         }
-        val mainActivity = activity as MainActivity
-        mainActivity.changeTitle("Menu")
+
         viewModel.positions.observe(viewLifecycleOwner,
             Observer { positions ->
                 run {
-                    var tmp = viewModel.positions.value;
+                    val tmp = viewModel.positions.value;
                     Log.d("mine2", tmp.toString())
                     menuAdapter.submitList(viewModel.positions.value)
                     menuPositionAdapter.submitList(viewModel.positions.value)

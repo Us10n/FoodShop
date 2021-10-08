@@ -26,7 +26,7 @@ class OffersFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentOffersBinding.inflate(inflater)
         binding.btnGet.setOnClickListener {
             viewModel.loadMenuPositions();

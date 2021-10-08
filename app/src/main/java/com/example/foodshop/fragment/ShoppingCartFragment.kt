@@ -32,9 +32,6 @@ class ShoppingCartFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val mainActivity = activity as MainActivity
-        mainActivity.changeTitle("Cart")
-
         binding.orderRecycler.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = orderAdapter

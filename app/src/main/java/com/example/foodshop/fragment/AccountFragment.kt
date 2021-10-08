@@ -26,7 +26,7 @@ class AccountFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentAccountBinding.inflate(inflater)
-        binding.vPager.adapter= AccountTabAdapter(activity as FragmentActivity)
+        binding.vPager.adapter = AccountTabAdapter(activity as FragmentActivity)
         viewModel.loadImage(
             "https://firebasestorage.googleapis.com/v0/b/test-4c0c2.appspot.com/o/imgs%2Ftest1.png?alt=media&token=6c3bfcbd-d8f2-4d63-aae9-34d6d84ef468",
             binding.accimage
@@ -36,14 +36,5 @@ class AccountFragment : Fragment() {
 
         return binding.root
     }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        val mainActivity = activity as MainActivity
-        mainActivity.changeTitle("Account")
-
-    }
-
 
 }

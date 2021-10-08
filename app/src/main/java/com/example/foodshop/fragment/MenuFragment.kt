@@ -18,7 +18,6 @@ import com.example.foodshop.ShavaListener
 import com.example.foodshop.adapters.MenuAdapter
 import com.example.foodshop.adapters.MenuPositionAdapter
 import com.example.foodshop.databinding.FragmentMenuBinding
-import com.example.foodshop.recycler.MenuPosition
 import com.example.foodshop.viewmodel.MenuFragmentViewModel
 import com.example.foodshop.viewmodel.ViewModelFactory
 
@@ -51,7 +50,8 @@ class MenuFragment : Fragment(), ShavaListener {
             layoutManager = GridLayoutManager(context, 2)
             adapter = menuPositionAdapter
         }
-
+        val mainActivity = activity as MainActivity
+        mainActivity.changeTitle("Menu")
         viewModel.positions.observe(viewLifecycleOwner,
             Observer { positions ->
                 run {
@@ -68,6 +68,6 @@ class MenuFragment : Fragment(), ShavaListener {
     }
 
     override fun loadImage(url: String, view: ImageView) {
-        viewModel.loadPosition(url,view)
+        viewModel.loadPosition(url, view)
     }
 }

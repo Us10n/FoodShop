@@ -2,7 +2,6 @@ package com.example.foodshop
 
 import android.app.Application
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.foodshop.databinding.ActivityMainBinding
 import com.example.foodshop.fragment.*
@@ -15,12 +14,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        if (savedInstanceState == null) openRegistrationFragment()
+        if (savedInstanceState == null) openEntryFragment()
     }
 
-    private fun openRegistrationFragment() {
+    private fun openEntryFragment() {
         val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(binding.fContainerView.id, RegistrationFragment()).commit()
+        transaction.replace(binding.fContainerView.id, EntryFragment()).commit()
     }
 
     fun openMainFragment() {

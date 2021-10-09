@@ -22,8 +22,8 @@
             android:gravity="center_horizontal"
             android:paddingTop="8dp"
             android:text="Title:"
-            android:textSize="24dp"
             android:textColor="@color/black"
+            android:textSize="24dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -34,8 +34,8 @@
             android:gravity="center_horizontal"
             android:paddingTop="8dp"
             android:text=" "
-            android:textSize="24dp"
             android:textColor="@color/black"
+            android:textSize="24dp"
             app:layout_constraintLeft_toRightOf="@id/title"
             app:layout_constraintTop_toTopOf="parent" />
 

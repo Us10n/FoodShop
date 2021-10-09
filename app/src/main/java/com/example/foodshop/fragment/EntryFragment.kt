@@ -1,0 +1,78 @@
+package com.example.foodshop.fragment
+
+import android.app.AlertDialog
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.Toast
+import androidx.fragment.app.Fragment
+import com.example.foodshop.MainActivity
+import com.example.foodshop.databinding.AutificationBinding
+import com.example.foodshop.databinding.CodeWindowBinding
+import com.example.foodshop.databinding.RegistrationWindowBinding
+
+class EntryFragment : Fragment() {
+
+    private lateinit var binding: AutificationBinding
+    private lateinit var regBinding: RegistrationWindowBinding
+    private lateinit var codeBinding: CodeWindowBinding
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        binding = AutificationBinding.inflate(inflater)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        binding.signIn.setOnClickListener {
+            openMainFragment()
+        }
+        binding.registration.setOnClickListener {
+            val dialog = AlertDialog.Builder(requireContext())
+                .setTitle("Registration")
+                .setMessage("Fill all fields")
+            val inflater = LayoutInflater.from(requireContext())
+            regBinding = RegistrationWindowBinding.inflate(inflater)
+            dialog.setView(regBinding.root)
+            dialog.setPositiveButton("Ok")
+            { _, _ ->
+                if (regBinding.numberField.text.toString().isNotBlank()) {
+                    openCodeWindow()
+                } else {
+                    Toast.makeText(requireContext(), "field is empty", Toast.LENGTH_LONG).show()
+                }
+            }
+            dialog.setNegativeButton("Back")
+            { _, _ -> (activity as MainActivity).supportFragmentManager.popBackStack() }
+            dialog.show()
+        }
+    }
+
+    private fun openCodeWindow() {
+        val codeDialog = AlertDialog.Builder(requireContext())
+            .setTitle("Registration")
+            .setMessage("Enter the code")
+        codeBinding = CodeWindowBinding.inflate(LayoutInflater.from(requireContext()))
+        codeDialog.setView(codeBinding.root)
+        codeDialog.setPositiveButton("Ok")
+        { _, _ ->
+            if (codeBinding.codeField.text.toString() == "1111") {
+                openMainFragment()
+            } else {
+                Toast.makeText(requireContext(), "wrong code", Toast.LENGTH_LONG).show()
+            }
+        }
+        codeDialog.setNegativeButton("Back")
+        { _, _ -> (activity as MainActivity).supportFragmentManager.popBackStack() }
+
+        (activity as MainActivity).supportFragmentManager.popBackStack()
+        codeDialog.show()
+    }
+
+    private fun openMainFragment() {
+        (activity as MainActivity).openMainFragment()
+    }
+}

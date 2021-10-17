@@ -18,6 +18,9 @@ class ViewModelFactory(private val repository: Repository) : ViewModelProvider.F
         if (modelClass.isAssignableFrom(OrderHistoryFragmentViewModel::class.java)) {
             return OrderHistoryFragmentViewModel(repository) as T
         }
+        if (modelClass.isAssignableFrom(EntryFragmentViewModel::class.java)) {
+            return EntryFragmentViewModel(repository) as T
+        }
         throw IllegalArgumentException("Unknown ViewModel class")
     }
 

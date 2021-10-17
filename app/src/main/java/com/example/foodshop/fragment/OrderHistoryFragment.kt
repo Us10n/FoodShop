@@ -15,7 +15,7 @@ class OrderHistoryFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding= FragmentOrderHistoryBinding.inflate(layoutInflater)
+        binding = FragmentOrderHistoryBinding.inflate(layoutInflater)
 
         return binding.root
     }

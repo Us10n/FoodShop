@@ -2,14 +2,14 @@ package com.example.foodshop
 
 import android.os.Build
 import androidx.annotation.RequiresApi
-import com.example.foodshop.recycler.MenuPosition
+import com.example.foodshop.recycler.FoodPosition
 import com.example.foodshop.recycler.ShoppingCartPosition
 
 object ShavaHolder {
-    private val order = mutableListOf<MenuPosition>()
+    private val order = mutableListOf<FoodPosition>()
     private var special = mutableSetOf<ShoppingCartPosition>()
 
-    fun addShava(item: MenuPosition) {
+    fun addShava(item: FoodPosition) {
         order.add(item)
     }
 
@@ -31,7 +31,6 @@ object ShavaHolder {
     @RequiresApi(Build.VERSION_CODES.N)
     fun deleteItem(item: ShoppingCartPosition) {
         special.remove(item)
-        println(special.size)
-        order.removeIf { it.name==item.item.name }
+        order.removeIf { it.name == item.item.name }
     }
 }

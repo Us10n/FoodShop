@@ -9,7 +9,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 
 class AccountFragmentViewModel(private val repository: Repository) : ViewModel() {
     fun loadImage(url: String, view: ImageView) {
-            repository.loadImage(url, view)
+        repository.loadImage(url, view)
     }
 
     fun initTabMediator(tabLayout: TabLayout, vPager: ViewPager2) {

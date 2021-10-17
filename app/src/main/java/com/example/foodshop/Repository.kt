@@ -1,8 +1,9 @@
 package com.example.foodshop
 
 import android.widget.ImageView
+import com.example.foodshop.callback.DbCallBack
 import com.example.foodshop.database.Database
-import com.example.foodshop.recycler.MenuPosition
+import com.example.foodshop.recycler.FoodPosition
 
 class Repository {
     private val database = Database()
@@ -11,11 +12,7 @@ class Repository {
         database.loadImgByUrl(url, view)
     }
 
-    suspend fun loadMenuPositions(myCallBack: MyCallBack): List<MenuPosition> {
+    suspend fun loadMenuPositions(myCallBack: DbCallBack): List<FoodPosition> {
         return database.loadMenuPositions(myCallBack);
-    }
-
-    suspend fun uploadMenuPosition(position: MenuPosition){
-        database.uploadMenuPosition(position)
     }
 }

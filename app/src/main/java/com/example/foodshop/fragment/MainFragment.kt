@@ -27,7 +27,6 @@ class MainFragment : Fragment() {
             when (it.itemId) {
                 R.id.menu -> openMenuFragment()
                 R.id.offers -> openOffersFragment()
-                R.id.coupons -> openCouponsFragment()
                 R.id.account -> openAccountFragment()
                 R.id.cart -> openCartFragment()
             }
@@ -39,14 +38,6 @@ class MainFragment : Fragment() {
         val recyclerFragment = AccountFragment()
         val transaction = childFragmentManager.beginTransaction()
         transaction.replace(binding.fContainerView.id, recyclerFragment).commit()
-    }
-
-    private fun openCouponsFragment() {
-        Toast.makeText(
-            requireContext(),
-            "CouponsFragment :3",
-            Toast.LENGTH_LONG
-        ).show()
     }
 
     private fun openCartFragment() {

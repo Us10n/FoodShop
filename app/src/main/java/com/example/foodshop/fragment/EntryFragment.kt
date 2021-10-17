@@ -7,13 +7,20 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.example.foodshop.MainActivity
+import com.example.foodshop.ShavaApplication
 import com.example.foodshop.databinding.AutificationBinding
 import com.example.foodshop.databinding.CodeWindowBinding
 import com.example.foodshop.databinding.RegistrationWindowBinding
+import com.example.foodshop.viewmodel.EntryFragmentViewModel
+import com.example.foodshop.viewmodel.ViewModelFactory
 
 class EntryFragment : Fragment() {
 
+    private val viewModel: EntryFragmentViewModel by viewModels {
+        ViewModelFactory(((activity as MainActivity).getMyApplication() as ShavaApplication).repository)
+    }
     private lateinit var binding: AutificationBinding
     private lateinit var regBinding: RegistrationWindowBinding
     private lateinit var codeBinding: CodeWindowBinding
@@ -30,6 +37,7 @@ class EntryFragment : Fragment() {
         binding.signIn.setOnClickListener {
             openMainFragment()
         }
+        viewModel.initManager(activity as MainActivity)
         binding.registration.setOnClickListener {
             val dialog = AlertDialog.Builder(requireContext())
                 .setTitle("Registration")
@@ -40,6 +48,7 @@ class EntryFragment : Fragment() {
             dialog.setPositiveButton("Ok")
             { _, _ ->
                 if (regBinding.numberField.text.toString().isNotBlank()) {
+                    viewModel.startPhoneNumberVerification(regBinding.numberField.text.toString())
                     openCodeWindow()
                 } else {
                     Toast.makeText(requireContext(), "field is empty", Toast.LENGTH_LONG).show()
@@ -59,8 +68,11 @@ class EntryFragment : Fragment() {
         codeDialog.setView(codeBinding.root)
         codeDialog.setPositiveButton("Ok")
         { _, _ ->
-            if (codeBinding.codeField.text.toString() == "1111") {
-                openMainFragment()
+            if (codeBinding.codeField.text.toString().isNotBlank()) {
+                if (viewModel.verifyPhoneNumberWithCode(codeBinding.codeField.text.toString()) == true) {
+                    openMainFragment()
+                } else Toast.makeText(requireContext(), "verification failed", Toast.LENGTH_LONG)
+                    .show()
             } else {
                 Toast.makeText(requireContext(), "wrong code", Toast.LENGTH_LONG).show()
             }

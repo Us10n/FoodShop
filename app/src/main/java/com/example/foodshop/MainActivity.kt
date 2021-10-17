@@ -4,7 +4,8 @@ import android.app.Application
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.foodshop.databinding.ActivityMainBinding
-import com.example.foodshop.fragment.*
+import com.example.foodshop.fragment.EntryFragment
+import com.example.foodshop.fragment.MainFragment
 
 class MainActivity : AppCompatActivity() {
 

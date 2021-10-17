@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.foodshop.MainActivity
 import com.example.foodshop.ShavaApplication
 import com.example.foodshop.ShavaHolder
-import com.example.foodshop.ShavaListener
+import com.example.foodshop.listener.ShavaListener
 import com.example.foodshop.adapters.MenuAdapter
 import com.example.foodshop.adapters.MenuPositionAdapter
 import com.example.foodshop.databinding.FragmentMenuBinding
@@ -53,7 +53,7 @@ class MenuFragment : Fragment(), ShavaListener {
         }
 
         viewModel.positions.observe(viewLifecycleOwner,
-            Observer { positions ->
+            Observer { _ ->
                 run {
                     val tmp = viewModel.positions.value;
                     Log.d("mine2", tmp.toString())

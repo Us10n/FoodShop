@@ -17,10 +17,6 @@
         android:title="@string/cart" />
 
     <item
-        android:id="@+id/coupons"
-        android:icon="@drawable/ic_baseline_local_offer_24"
-        android:title="@string/coupons" />
-    <item
         android:id="@+id/account"
         android:icon="@drawable/ic_baseline_account_circle_24"
         android:title="@string/account" />

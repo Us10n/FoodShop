@@ -1,8 +1,8 @@
-package com.example.foodshop
+package com.example.foodshop.exception
 
 import kotlin.Exception
 
-open class Exception: Exception {
+open class Exception : Exception {
     constructor() : super()
     constructor(message: String?) : super(message)
     constructor(message: String?, cause: Throwable?) : super(message, cause)

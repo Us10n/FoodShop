@@ -7,7 +7,7 @@ class CartViewHolder(private val binding: CartPositionBinding) :
     RecyclerView.ViewHolder(binding.root) {
     fun bind(item: ShoppingCartPosition) {
         binding.title.text = item.item.name
-        binding.priceTitle.text = (item.item.price.toInt()*item.number).toString()
+        binding.priceTitle.text = (item.item.price[0] * item.number).toString()
         binding.numberTitle.text = item.number.toString()
     }
 }

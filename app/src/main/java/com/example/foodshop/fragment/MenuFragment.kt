@@ -12,16 +12,18 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.foodshop.MainActivity
+import com.example.foodshop.R
 import com.example.foodshop.ShavaApplication
 import com.example.foodshop.ShavaHolder
 import com.example.foodshop.listener.ShavaListener
 import com.example.foodshop.adapters.MenuAdapter
 import com.example.foodshop.adapters.MenuPositionAdapter
 import com.example.foodshop.databinding.FragmentMenuBinding
+import com.example.foodshop.listener.FullScreenListener
 import com.example.foodshop.viewmodel.MenuFragmentViewModel
 import com.example.foodshop.viewmodel.ViewModelFactory
 
-class MenuFragment : Fragment(), ShavaListener {
+class MenuFragment : Fragment(), ShavaListener, FullScreenListener {
 
     private val viewModel: MenuFragmentViewModel by viewModels {
         ViewModelFactory(((activity as MainActivity).getMyApplication() as ShavaApplication).repository)
@@ -29,7 +31,7 @@ class MenuFragment : Fragment(), ShavaListener {
     private val holder = ShavaHolder
     private lateinit var binding: FragmentMenuBinding
     private val menuAdapter = MenuAdapter()
-    private val menuPositionAdapter = MenuPositionAdapter(holder, this)
+    private val menuPositionAdapter = MenuPositionAdapter(holder, this, this)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -69,5 +71,11 @@ class MenuFragment : Fragment(), ShavaListener {
 
     override fun loadImage(url: String, view: ImageView) {
         viewModel.loadPosition(url, view)
+    }
+
+    override fun createFullScreen(url: String, name: String) {
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace(R.id.fContainerView, FullScreenFragment.newInstance(url, name))
+            .addToBackStack("").commit()
     }
 }

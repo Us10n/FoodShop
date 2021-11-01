@@ -18,7 +18,7 @@ object ShavaHolder {
         order.forEach {
             var number = 0
             for (item in order) {
-                if (item.name.equals(it.name)) {
+                if (item.name.equals(it.name) && item.description.equals(it.description)) {
                     number++
                 }
             }
@@ -31,6 +31,6 @@ object ShavaHolder {
     @RequiresApi(Build.VERSION_CODES.N)
     fun deleteItem(item: ShoppingCartPosition) {
         special.remove(item)
-        order.removeIf { it.name == item.item.name }
+        order.removeIf { it.name == item.item.name && it.description == item.item.description }
     }
 }

@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.foodshop.MainActivity
+import com.example.foodshop.R
 import com.example.foodshop.ShavaApplication
 import com.example.foodshop.ShavaHolder
 import com.example.foodshop.adapters.OfferAdapter
@@ -19,14 +20,14 @@ import com.example.foodshop.listener.ShavaListener
 import com.example.foodshop.viewmodel.OffersFragmentViewModel
 import com.example.foodshop.viewmodel.ViewModelFactory
 
-class OffersFragment : Fragment(),ShavaListener,FullScreenListener {
+class OffersFragment : Fragment(), ShavaListener, FullScreenListener {
 
     private val viewModel: OffersFragmentViewModel by viewModels {
         ViewModelFactory(((activity as MainActivity).getMyApplication() as ShavaApplication).repository)
     }
     private lateinit var binding: FragmentOffersBinding
     private val holder = ShavaHolder
-    private val offerAdapter=OfferAdapter(holder,this,this)
+    private val offerAdapter = OfferAdapter(holder, this, this)
 
 
     override fun onCreateView(
@@ -47,10 +48,17 @@ class OffersFragment : Fragment(),ShavaListener,FullScreenListener {
     }
 
     override fun loadImage(url: String, view: ImageView) {
-        viewModel.loadPosition(url,view)
+        viewModel.loadPosition(url, view)
     }
 
     override fun createFullScreen(url: String, name: String) {
         TODO("Not yet implemented")
     }
+
+    override fun createFullScreen(url: String, name: String, description:String) {
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace(R.id.fContainerView, FullOfferFragment.newInstance(url, name, description))
+            .addToBackStack("").commit()
+    }
+
 }

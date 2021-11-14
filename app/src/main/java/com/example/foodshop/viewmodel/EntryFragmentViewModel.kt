@@ -1,5 +1,6 @@
 package com.example.foodshop.viewmodel
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.foodshop.MainActivity
 import com.example.foodshop.Repository
@@ -7,8 +8,9 @@ import com.example.foodshop.callback.AuthCallBack
 import com.example.foodshop.managers.VerificationManager
 
 class EntryFragmentViewModel(private val repository: Repository) : ViewModel() {
+
     lateinit var manager: VerificationManager
-    var isSignSuccessful = false;
+    var isSignSuccessful: MutableLiveData<Boolean> = MutableLiveData()
 
     fun initManager(mainActivity: MainActivity) {
         manager = VerificationManager(mainActivity)
@@ -21,7 +23,7 @@ class EntryFragmentViewModel(private val repository: Repository) : ViewModel() {
     fun verifyPhoneNumberWithCode(code: String): Boolean {
         return manager.verifyPhoneNumberWithCode(code, object : AuthCallBack {
             override fun onCallback(isSigned: Boolean) {
-                isSignSuccessful=isSigned
+                isSignSuccessful.postValue(isSigned)
             }
         })
     }

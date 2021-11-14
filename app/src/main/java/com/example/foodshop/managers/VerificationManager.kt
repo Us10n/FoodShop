@@ -91,6 +91,7 @@ class VerificationManager(
             }
             .addOnFailureListener { e ->
                 Log.d("mine", "sign in with auth cred $e")
+                authCallBack?.onCallback(false)
                 changeAnswer(false)
             }
         return answer

@@ -13,6 +13,10 @@ object ShavaHolder {
         order.add(item)
     }
 
+    fun deleteShava(item: FoodPosition) {
+        order.remove(item)
+    }
+
     fun getSpecialList(): List<ShoppingCartPosition> {
         val specialList = mutableSetOf<ShoppingCartPosition>()
         order.forEach {
@@ -32,5 +36,9 @@ object ShavaHolder {
     fun deleteItem(item: ShoppingCartPosition) {
         special.remove(item)
         order.removeIf { it.name == item.item.name && it.description == item.item.description }
+    }
+
+    fun deleteAll() {
+        order.removeAll(order)
     }
 }

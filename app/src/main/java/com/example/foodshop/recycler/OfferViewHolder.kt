@@ -14,5 +14,8 @@ class OfferViewHolder(
     fun bind(item: OfferPosition, listener: ShavaListener) {
         listener.loadImage(item.imgUrl, binding.offerImage)
         binding.offerText.text = item.name
+        binding.root.setOnClickListener {
+            listenerFull.createFullScreen(item.imgUrl,item.name, item.description)
+        }
     }
 }

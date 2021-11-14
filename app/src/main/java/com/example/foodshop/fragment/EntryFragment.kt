@@ -34,6 +34,12 @@ class EntryFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        viewModel.isSignSuccessful.observe(viewLifecycleOwner){
+            if (it) {
+                openMainFragment()
+            } else Toast.makeText(requireContext(), "verification failed", Toast.LENGTH_LONG)
+                .show()
+        }
         binding.signIn.setOnClickListener {
             openMainFragment()
         }
@@ -69,10 +75,7 @@ class EntryFragment : Fragment() {
         codeDialog.setPositiveButton("Ok")
         { _, _ ->
             if (codeBinding.codeField.text.toString().isNotBlank()) {
-                if (viewModel.verifyPhoneNumberWithCode(codeBinding.codeField.text.toString())) {
-                    openMainFragment()
-                } else Toast.makeText(requireContext(), "verification failed", Toast.LENGTH_LONG)
-                    .show()
+                viewModel.verifyPhoneNumberWithCode(codeBinding.codeField.text.toString())
             } else {
                 Toast.makeText(requireContext(), "wrong code", Toast.LENGTH_LONG).show()
             }

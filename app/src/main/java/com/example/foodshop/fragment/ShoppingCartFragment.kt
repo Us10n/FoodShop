@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.foodshop.R
 import com.example.foodshop.ShavaHolder
 import com.example.foodshop.adapters.CartAdapter
 import com.example.foodshop.databinding.FragmentCartBinding
@@ -36,6 +37,14 @@ class ShoppingCartFragment : Fragment() {
         }
         orderAdapter.submitList(holder.getSpecialList())
         touchHelper.attachToRecyclerView(binding.orderRecycler)
+        binding.make.setOnClickListener {
+            createOrderScreen()
+        }
     }
 
+    private fun createOrderScreen() {
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace(R.id.fContainerView, OrderFragment())
+            .addToBackStack("").commit()
+    }
 }

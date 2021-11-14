@@ -72,4 +72,8 @@ class MenuFragment : Fragment(), ShavaListener, FullScreenListener {
             .replace(R.id.fContainerView, FullScreenFragment.newInstance(url, name))
             .addToBackStack("").commit()
     }
+
+    override fun createFullScreen(url: String, name: String, description: String) {
+        TODO("Not yet implemented")
+    }
 }

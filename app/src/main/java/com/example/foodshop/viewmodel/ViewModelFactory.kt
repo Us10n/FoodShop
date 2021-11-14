@@ -24,6 +24,9 @@ class ViewModelFactory(private val repository: Repository) : ViewModelProvider.F
         if (modelClass.isAssignableFrom(FullScreenViewModel::class.java)) {
             return FullScreenViewModel(repository) as T
         }
+        if (modelClass.isAssignableFrom(FullOfferViewModel::class.java)) {
+            return FullOfferViewModel(repository) as T
+        }
         throw IllegalArgumentException("Unknown ViewModel class")
     }
 

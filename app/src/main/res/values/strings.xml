@@ -13,5 +13,10 @@
     <string name="recipe">Recipe</string>
     <string name="emptyPhoneNumber">(No phone number)</string>
     <string name="unknownName">Unknown</string>
+    <string name="offer">Offer</string>
+    <string name="description">description</string>
+    <string name="order">Order</string>
+    <string name="name">Name</string>
+    <string name="number">Number</string>
 
 </resources>

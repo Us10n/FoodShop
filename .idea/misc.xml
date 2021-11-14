@@ -4,10 +4,15 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/FoodShop/app/src/main/res/layout/activity_main.xml" value="0.1" />
-        <entry key="..\:/FoodShop/app/src/main/res/layout/cart_position.xml" value="0.264" />
+        <entry key="..\:/FoodShop/app/src/main/res/layout/autification.xml" value="0.1" />
+        <entry key="..\:/FoodShop/app/src/main/res/layout/cart_position.xml" value="0.22790697674418606" />
         <entry key="..\:/FoodShop/app/src/main/res/layout/fragment_cart.xml" value="0.1" />
+        <entry key="..\:/FoodShop/app/src/main/res/layout/fragment_full_offer.xml" value="0.1814814814814815" />
+        <entry key="..\:/FoodShop/app/src/main/res/layout/fragment_order.xml" value="0.17192982456140352" />
         <entry key="..\:/FoodShop/app/src/main/res/layout/full_screen_fragment.xml" value="0.136" />
         <entry key="..\:/FoodShop/app/src/main/res/layout/menu_position.xml" value="0.1" />
+        <entry key="..\:/FoodShop/app/src/main/res/layout/offer_item.xml" value="0.13020833333333334" />
+        <entry key="..\:/FoodShop/app/src/main/res/layout/registration_window.xml" value="0.1" />
       </map>
     </option>
   </component>

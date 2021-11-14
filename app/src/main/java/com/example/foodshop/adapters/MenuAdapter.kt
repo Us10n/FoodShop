@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import com.example.foodshop.databinding.ItemBinding
 import com.example.foodshop.recycler.MenuDiffCallback
-import com.example.foodshop.recycler.FoodPosition
+import com.example.foodshop.database.FoodPosition
 import com.example.foodshop.recycler.MenuViewHolder
 
 class MenuAdapter: ListAdapter<FoodPosition, MenuViewHolder>(MenuDiffCallback()){

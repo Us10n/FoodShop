@@ -6,15 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.foodshop.MainActivity
-import com.example.foodshop.R
-import com.example.foodshop.ShavaApplication
-import com.example.foodshop.ShavaHolder
+import com.example.foodshop.*
 import com.example.foodshop.listener.ShavaListener
 import com.example.foodshop.adapters.MenuAdapter
 import com.example.foodshop.adapters.MenuPositionAdapter
@@ -57,15 +55,11 @@ class MenuFragment : Fragment(), ShavaListener, FullScreenListener {
         viewModel.positions.observe(viewLifecycleOwner,
             Observer { _ ->
                 run {
-                    val tmp = viewModel.positions.value;
-                    Log.d("mine2", tmp.toString())
                     menuAdapter.submitList(viewModel.positions.value)
                     menuPositionAdapter.submitList(viewModel.positions.value)
                 }
 
             })
-
-
         viewModel.loadMenuPositions()
     }
 

@@ -1,7 +1,7 @@
 package com.example.foodshop.callback
 
-import com.example.foodshop.recycler.FoodPosition
+import com.example.foodshop.database.FoodPosition
 
-interface DbCallBack {
+interface MenuCallBack {
     fun onCallback(positionsList: List<FoodPosition>)
 }

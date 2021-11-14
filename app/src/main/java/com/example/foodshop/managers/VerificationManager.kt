@@ -1,6 +1,7 @@
 package com.example.foodshop.managers
 
 import android.util.Log
+import com.example.foodshop.CurrentUser
 import com.example.foodshop.MainActivity
 import com.example.foodshop.callback.AuthCallBack
 import com.google.firebase.FirebaseException
@@ -16,11 +17,10 @@ class VerificationManager(
     private var forceResendingToken: PhoneAuthProvider.ForceResendingToken? = null
     private var authCallBacks: PhoneAuthProvider.OnVerificationStateChangedCallbacks
     private lateinit var verificationId: String
-    private var firebaseAuth: FirebaseAuth
+    private var firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
     private var answer = false
 
     init {
-        firebaseAuth = FirebaseAuth.getInstance()
         authCallBacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
             override fun onCodeSent(
                 verId: String,
@@ -71,7 +71,7 @@ class VerificationManager(
     }
 
     fun verifyPhoneNumberWithCode(code: String, authCallBack: AuthCallBack): Boolean {
-        var credential = PhoneAuthProvider.getCredential(verificationId, code);
+        val credential = PhoneAuthProvider.getCredential(verificationId, code);
         return signInWithPhoneAuthCredential(credential, authCallBack)
     }
 
@@ -82,7 +82,10 @@ class VerificationManager(
         firebaseAuth.signInWithCredential(credential)
             .addOnSuccessListener {
                 val phone = firebaseAuth.currentUser?.phoneNumber
-                Log.d("mine", "Logged in as a $phone");
+                val uid = it.user?.uid
+                CurrentUser.number = phone ?: ""
+                CurrentUser.uid = uid ?: ""
+                Log.d("mine", "Logged in as a $phone with uid $uid");
                 authCallBack?.onCallback(true)
                 changeAnswer(true)
             }

@@ -1,4 +1,4 @@
-package com.example.foodshop.recycler
+package com.example.foodshop.database
 
 data class FoodPosition(
     var id: Long = 0,
@@ -7,4 +7,7 @@ data class FoodPosition(
     var description: String = "",
     var price: List<Double> = arrayListOf(),
     var weight: List<Double> = arrayListOf()
-)
+) {
+    fun isEmpty(): Boolean =
+        id == 0L && name == "" && imgUrl == "" && description == "" && price.isEmpty() && weight.isEmpty()
+}

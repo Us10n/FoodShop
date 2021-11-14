@@ -7,7 +7,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import com.example.foodshop.CurrentUser
 import com.example.foodshop.MainActivity
+import com.example.foodshop.R
 import com.example.foodshop.ShavaApplication
 import com.example.foodshop.adapters.AccountTabAdapter
 import com.example.foodshop.databinding.FragmentAccountBinding
@@ -27,13 +30,16 @@ class AccountFragment : Fragment() {
     ): View {
         binding = FragmentAccountBinding.inflate(inflater)
         binding.vPager.adapter = AccountTabAdapter(activity as FragmentActivity)
-        viewModel.loadImage(
-            "https://firebasestorage.googleapis.com/v0/b/test-4c0c2.appspot.com/o/imgs%2Ftest1.png?alt=media&token=6c3bfcbd-d8f2-4d63-aae9-34d6d84ef468",
-            binding.accimage
-        )
-
+        binding.accountPhoneNumber.text =
+            if (CurrentUser.number.isNotEmpty()) CurrentUser.number else
+                getString(R.string.emptyPhoneNumber)
         viewModel.initTabMediator(binding.tabLayout, binding.vPager)
-
+        viewModel.account.observe(viewLifecycleOwner, Observer {
+            binding.accountName.text=it.name
+            binding.accountPhoneNumber.text=it.phone
+            viewModel.loadImage(it.imgUrl,binding.accimage)
+        })
+        viewModel.loadAccount(CurrentUser.uid)
         return binding.root
     }
 

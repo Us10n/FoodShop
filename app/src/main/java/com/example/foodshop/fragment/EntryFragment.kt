@@ -69,7 +69,7 @@ class EntryFragment : Fragment() {
         codeDialog.setPositiveButton("Ok")
         { _, _ ->
             if (codeBinding.codeField.text.toString().isNotBlank()) {
-                if (viewModel.verifyPhoneNumberWithCode(codeBinding.codeField.text.toString()) == true) {
+                if (viewModel.verifyPhoneNumberWithCode(codeBinding.codeField.text.toString())) {
                     openMainFragment()
                 } else Toast.makeText(requireContext(), "verification failed", Toast.LENGTH_LONG)
                     .show()

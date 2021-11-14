@@ -1,20 +1,17 @@
 package com.example.foodshop.fragment
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.foodshop.MainActivity
-import com.example.foodshop.viewmodel.FullScreenViewModel
-import com.example.foodshop.R
 import com.example.foodshop.ShavaApplication
 import com.example.foodshop.ShavaHolder
 import com.example.foodshop.databinding.FullScreenFragmentBinding
-import com.example.foodshop.listener.FullScreenListener
-import com.example.foodshop.recycler.FoodPosition
+import com.example.foodshop.database.FoodPosition
+import com.example.foodshop.viewmodel.FullScreenViewModel
 import com.example.foodshop.viewmodel.ViewModelFactory
 
 class FullScreenFragment : Fragment() {
@@ -48,7 +45,7 @@ class FullScreenFragment : Fragment() {
             )
             requireActivity().supportFragmentManager.popBackStack()
         }
-        binding.toolbar.setOnClickListener {
+        binding.toolBar.setOnClickListener {
             requireActivity().supportFragmentManager.popBackStack()
         }
     }

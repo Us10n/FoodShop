@@ -21,19 +21,21 @@
             android:id="@+id/shaurmaimg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:cropToPadding="true"
             android:maxWidth="170dp"
             android:maxHeight="170dp"
             android:minWidth="170dp"
             android:minHeight="170dp"
-            android:scaleType="centerCrop"
+            android:scaleType="fitXY"
             app:layout_constraintBottom_toTopOf="@id/addToCart"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@tools:sample/avatars" />
+            android:adjustViewBounds="true"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/addToCart"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="2dp"
             android:layout_marginLeft="2dp"

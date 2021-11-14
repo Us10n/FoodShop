@@ -6,10 +6,9 @@ import androidx.recyclerview.widget.ListAdapter
 import com.example.foodshop.ShavaHolder
 import com.example.foodshop.listener.ShavaListener
 import com.example.foodshop.databinding.MenuPositionBinding
-import com.example.foodshop.fragment.FullScreenFragment
 import com.example.foodshop.listener.FullScreenListener
 import com.example.foodshop.recycler.MenuDiffCallback
-import com.example.foodshop.recycler.FoodPosition
+import com.example.foodshop.database.FoodPosition
 import com.example.foodshop.recycler.MenuPositionViewHolder
 
 class MenuPositionAdapter(

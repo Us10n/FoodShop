@@ -2,7 +2,7 @@ package com.example.foodshop
 
 import android.os.Build
 import androidx.annotation.RequiresApi
-import com.example.foodshop.recycler.FoodPosition
+import com.example.foodshop.database.FoodPosition
 import com.example.foodshop.recycler.ShoppingCartPosition
 
 object ShavaHolder {

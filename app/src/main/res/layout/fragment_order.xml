@@ -77,8 +77,17 @@
         android:layout_height="wrap_content"
         android:text="Price:"
         android:textSize="24dp"
-        app:layout_constraintBottom_toTopOf="@id/sendOrder"
+        app:layout_constraintBottom_toTopOf="@id/bonus"
         app:layout_constraintTop_toBottomOf="@id/scroll" />
+
+    <TextView
+        android:id="@+id/bonus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Bonus:"
+        android:textSize="24dp"
+        app:layout_constraintBottom_toTopOf="@id/sendOrder"
+        app:layout_constraintTop_toBottomOf="@id/price" />
 
     <Button
         android:id="@+id/sendOrder"

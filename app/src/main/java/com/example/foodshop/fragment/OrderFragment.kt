@@ -39,6 +39,7 @@ class OrderFragment : Fragment() {
             fullPrice += it.item.price[0] * it.number
         }
         binding.price.text = "Price:" + fullPrice
+        binding.bonus.text = "Bonus:" + fullPrice/5.0
         binding.sendOrder.setOnClickListener {
             if (!binding.name.text.isEmpty() && !binding.number.text.isEmpty()) {
                 Toast.makeText(context, "Order was sent", Toast.LENGTH_LONG).show()

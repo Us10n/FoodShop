@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import com.example.foodshop.CurrentUser
 import com.example.foodshop.MainActivity
 import com.example.foodshop.ShavaApplication
 import com.example.foodshop.databinding.AutificationBinding
@@ -30,12 +32,23 @@ class EntryFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = AutificationBinding.inflate(inflater)
+
+        val macAddress = viewModel.getDeviceMacAddress(requireContext())
+        CurrentUser.account.mac = macAddress
+        viewModel.isAuthorized.observe(viewLifecycleOwner, Observer {
+            if (it) {
+                openMainFragment()
+            }
+        })
+        viewModel.getAuthorizationStatus(macAddress)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        viewModel.isSignSuccessful.observe(viewLifecycleOwner){
+        viewModel.isSignSuccessful.observe(viewLifecycleOwner) {
             if (it) {
+                addSession(CurrentUser.account.mac)
+                addUser()
                 openMainFragment()
             } else Toast.makeText(requireContext(), "verification failed", Toast.LENGTH_LONG)
                 .show()
@@ -89,5 +102,13 @@ class EntryFragment : Fragment() {
 
     private fun openMainFragment() {
         (activity as MainActivity).openMainFragment()
+    }
+
+    private fun addSession(mac: String) {
+        viewModel.addSession(mac)
+    }
+
+    private fun addUser() {
+        viewModel.addUser(CurrentUser.account)
     }
 }

@@ -29,7 +29,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:fontFamily="@font/abril_fatface"
+                android:fontFamily="sans-serif-black"
                 android:text="@string/order"
                 android:textColor="@color/white"
                 android:textSize="24dp" />
@@ -51,6 +51,7 @@
         android:id="@+id/number"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:inputType="none"
         android:hint="@string/number"
         app:layout_constraintBottom_toTopOf="@id/scroll"
         app:layout_constraintTop_toBottomOf="@id/name" />

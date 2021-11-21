@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
         if (savedInstanceState == null) openEntryFragment()
     }
 
-    private fun openEntryFragment() {
+    fun openEntryFragment() {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(binding.fContainerView.id, EntryFragment()).commit()
     }

@@ -2,12 +2,10 @@ package com.example.foodshop
 
 import android.content.Context
 import android.widget.ImageView
-import com.example.foodshop.callback.AccountCallBack
-import com.example.foodshop.callback.MenuCallBack
-import com.example.foodshop.callback.OfferCallBack
+import com.example.foodshop.callback.*
+import com.example.foodshop.database.Account
 import com.example.foodshop.database.Database
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.PhoneAuthProvider
+import com.example.foodshop.recycler.HistoryPosition
 import java.net.NetworkInterface
 import java.util.*
 
@@ -18,16 +16,28 @@ class Repository {
         database.loadImgByUrl(url, view)
     }
 
-    fun loadOffers(myCallBack: OfferCallBack){
+    fun loadOffers(myCallBack: OfferCallBack) {
         return database.loadOffers(myCallBack)
     }
 
-    fun loadMenuPositions(myCallBack: MenuCallBack){
+    fun loadMenuPositions(myCallBack: MenuCallBack) {
         return database.loadMenuPositions(myCallBack)
     }
 
-    fun loadAccount(uid:String, myCallBack: AccountCallBack){
-        return database.loadAccount(uid,myCallBack)
+    fun loadAccount(mac: String, myCallBack: AccountCallBack) {
+        return database.loadAccount(mac, myCallBack)
+    }
+
+    fun loadAccountHistory(mac: String, myCallBack: AccountHistoryCallBack) {
+        database.loadAccountHistory(mac, myCallBack)
+    }
+
+    fun addSession(mac: String) {
+        return database.addSession(mac)
+    }
+
+    fun loadDeviceAuthStatus(mac: String, myCallBack: DeviceStatusCallBack) {
+        return database.loadDeviceAuthStatus(mac, myCallBack)
     }
 
     fun getDeviceMacAddress(context: Context): String {
@@ -48,5 +58,17 @@ class Repository {
             }
         }
         return stringMac.dropLast(1)
+    }
+
+    fun addAccount(account: Account) {
+        database.uploadAccount(account)
+    }
+
+    fun addOrder(order: HistoryPosition) {
+        database.uploadOrder(order)
+    }
+
+    fun deleteSession(mac: String, callBack: DeleteSessionCallBack) {
+        database.deleteSession(mac,callBack)
     }
 }

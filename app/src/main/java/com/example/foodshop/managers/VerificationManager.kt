@@ -18,7 +18,6 @@ class VerificationManager(
     private var authCallBacks: PhoneAuthProvider.OnVerificationStateChangedCallbacks
     private lateinit var verificationId: String
     private var firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
-    private var answer = false
 
     init {
         authCallBacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
@@ -70,34 +69,25 @@ class VerificationManager(
         PhoneAuthProvider.verifyPhoneNumber(options)
     }
 
-    fun verifyPhoneNumberWithCode(code: String, authCallBack: AuthCallBack): Boolean {
+    fun verifyPhoneNumberWithCode(code: String, authCallBack: AuthCallBack) {
         val credential = PhoneAuthProvider.getCredential(verificationId, code);
-        return signInWithPhoneAuthCredential(credential, authCallBack)
+        signInWithPhoneAuthCredential(credential, authCallBack)
     }
 
     private fun signInWithPhoneAuthCredential(
         credential: PhoneAuthCredential,
         authCallBack: AuthCallBack?
-    ): Boolean {
+    ) {
         firebaseAuth.signInWithCredential(credential)
             .addOnSuccessListener {
                 val phone = firebaseAuth.currentUser?.phoneNumber
-                val uid = it.user?.uid
-                CurrentUser.number = phone ?: ""
-                CurrentUser.uid = uid ?: ""
-                Log.d("mine", "Logged in as a $phone with uid $uid");
+                CurrentUser.account.phone = phone ?: ""
                 authCallBack?.onCallback(true)
-                changeAnswer(true)
             }
             .addOnFailureListener { e ->
                 Log.d("mine", "sign in with auth cred $e")
                 authCallBack?.onCallback(false)
-                changeAnswer(false)
             }
-        return answer
     }
 
-    private fun changeAnswer(answ: Boolean) {
-        answer = answ
-    }
 }

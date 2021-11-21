@@ -15,8 +15,8 @@ class ViewModelFactory(private val repository: Repository) : ViewModelProvider.F
         if (modelClass.isAssignableFrom(OffersFragmentViewModel::class.java)) {
             return OffersFragmentViewModel(repository) as T
         }
-        if (modelClass.isAssignableFrom(OrderHistoryFragmentViewModel::class.java)) {
-            return OrderHistoryFragmentViewModel(repository) as T
+        if (modelClass.isAssignableFrom(OrderFragmentViewModel::class.java)) {
+            return OrderFragmentViewModel(repository) as T
         }
         if (modelClass.isAssignableFrom(EntryFragmentViewModel::class.java)) {
             return EntryFragmentViewModel(repository) as T

@@ -53,10 +53,10 @@ class MenuFragment : Fragment(), ShavaListener, FullScreenListener {
         }
 
         viewModel.positions.observe(viewLifecycleOwner,
-            Observer { _ ->
-                run {
-                    menuAdapter.submitList(viewModel.positions.value)
-                    menuPositionAdapter.submitList(viewModel.positions.value)
+            Observer {
+                if(!it.isNullOrEmpty()) {
+                    menuAdapter.submitList(it)
+                    menuPositionAdapter.submitList(it)
                 }
 
             })

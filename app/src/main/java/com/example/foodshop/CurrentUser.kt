@@ -1,6 +1,9 @@
 package com.example.foodshop
 
+import com.example.foodshop.database.Account
+
 object CurrentUser {
-    var number:String=""
-    var uid:String=""
+    val account by lazy { Account() }
+    var sessionId: String = ""
+    var accountId:String=""
 }

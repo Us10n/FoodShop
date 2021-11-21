@@ -1,14 +1,9 @@
 package com.example.foodshop.database
 
-import com.google.firebase.firestore.DocumentReference
-
 data class Account(
-    val id: String = "",
-    val name: String = "",
-    val phone: String = "",
-    val imgUrl: String = "",
-    val orders: List<DocumentReference> = arrayListOf()
+    var mac: String = "",
+    var name: String = "",
+    var phone: String = "",
+    var imgUrl: String = "https://firebasestorage.googleapis.com/v0/b/test-4c0c2.appspot.com/o/imgs%2Ficons%2Ficon.jpg?alt=media&token=5f025ac2-c295-4f17-9ce1-cec193fa44fa",
 ) {
-    fun isEmpty(): Boolean =
-        id == "" && name == "" && phone == "" && orders.isEmpty()
 }

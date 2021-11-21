@@ -1,9 +1,12 @@
 package com.example.foodshop.fragment
 
+import android.R
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -34,6 +37,20 @@ class OrderFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val cats = arrayOf("Гикало, 9", "Петруся Бровки, 6")
+
+        val adapter = ArrayAdapter<String>(
+            requireContext(), R.layout.simple_dropdown_item_1line, cats
+        )
+        binding.autoCompleteTextView.apply {
+            setAdapter(adapter)
+            threshold = 2
+            onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
+                if (hasFocus) {
+                    binding.autoCompleteTextView.showDropDown()
+                }
+            }
+        }
         var orderText = ""
         var fullPrice: Double = 0.0
         holder.getSpecialList().forEach {

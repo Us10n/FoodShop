@@ -44,25 +44,33 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/name"
-        app:layout_constraintBottom_toTopOf="@id/name"
+        app:layout_constraintBottom_toTopOf="@id/number"
         app:layout_constraintTop_toBottomOf="@id/appBar" />
 
     <EditText
         android:id="@+id/number"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="none"
         android:hint="@string/number"
+        android:inputType="none"
+        app:layout_constraintBottom_toTopOf="@id/autoCompleteTextView"
+        app:layout_constraintTop_toBottomOf="@id/name"/>
+
+    <AutoCompleteTextView
+        android:id="@+id/autoCompleteTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Address"
         app:layout_constraintBottom_toTopOf="@id/scroll"
-        app:layout_constraintTop_toBottomOf="@id/name" />
+        app:layout_constraintTop_toBottomOf="@id/number"/>
 
     <ScrollView
         android:id="@+id/scroll"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@id/sendOrder"
-        app:layout_constraintTop_toBottomOf="@id/number">
+        app:layout_constraintBottom_toTopOf="@id/price"
+        app:layout_constraintTop_toBottomOf="@id/autoCompleteTextView">
 
         <TextView
             android:id="@+id/comment"

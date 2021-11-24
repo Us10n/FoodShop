@@ -1,9 +1,12 @@
 package com.example.foodshop.fragment
 
+import android.app.AlertDialog
 import android.os.Bundle
+import android.text.InputType
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -13,6 +16,7 @@ import com.example.foodshop.MainActivity
 import com.example.foodshop.ShavaApplication
 import com.example.foodshop.adapters.HistoryAdapter
 import com.example.foodshop.callback.DeleteSessionCallBack
+import com.example.foodshop.databinding.CodeWindowBinding
 import com.example.foodshop.databinding.FragmentAccountBinding
 import com.example.foodshop.viewmodel.AccountFragmentViewModel
 import com.example.foodshop.viewmodel.ViewModelFactory
@@ -24,6 +28,7 @@ class AccountFragment : Fragment() {
     }
     private lateinit var binding: FragmentAccountBinding
     private val historyAdapter = HistoryAdapter()
+    private lateinit var codeBinding: CodeWindowBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,10 +51,10 @@ class AccountFragment : Fragment() {
                 historyAdapter.items = it
             }
         })
-        binding.editImg.setOnClickListener{
-
+        binding.editImg.setOnClickListener {
+            openNameWindow()
         }
-        binding.exitImg.setOnClickListener{
+        binding.exitImg.setOnClickListener {
             deleteSession()
         }
         loadAccountInfo()
@@ -58,7 +63,7 @@ class AccountFragment : Fragment() {
     }
 
     private fun deleteSession() {
-        viewModel.deleteSession(CurrentUser.account.mac,object: DeleteSessionCallBack{
+        viewModel.deleteSession(CurrentUser.account.mac, object : DeleteSessionCallBack {
             override fun onCallBack() {
                 openEntryFragment()
             }
@@ -72,6 +77,29 @@ class AccountFragment : Fragment() {
 
     private fun loadAccountHistory() {
         viewModel.loadAccountHistory(CurrentUser.account.mac)
+    }
+
+    private fun openNameWindow() {
+        val codeDialog = AlertDialog.Builder(requireContext())
+            .setTitle("Name")
+            .setMessage("Edit")
+        codeBinding = CodeWindowBinding.inflate(LayoutInflater.from(requireContext()))
+        codeBinding.codeField.hint = binding.accountName.text.toString()
+        codeBinding.codeField.inputType = InputType.TYPE_CLASS_TEXT
+        codeDialog.setView(codeBinding.root)
+        codeDialog.setPositiveButton("Ok")
+        { _, _ ->
+            if (codeBinding.codeField.text.toString().isNotBlank()) {
+                binding.accountName.text = codeBinding.codeField.text
+            } else {
+                Toast.makeText(requireContext(), "field is empty", Toast.LENGTH_LONG).show()
+            }
+        }
+        codeDialog.setNegativeButton("Back")
+        { _, _ -> (activity as MainActivity).supportFragmentManager.popBackStack() }
+
+        (activity as MainActivity).supportFragmentManager.popBackStack()
+        codeDialog.show()
     }
 
     private fun openEntryFragment() {

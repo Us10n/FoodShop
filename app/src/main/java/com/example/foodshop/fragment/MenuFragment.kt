@@ -55,12 +55,17 @@ class MenuFragment : Fragment(), ShavaListener, FullScreenListener {
         viewModel.positions.observe(viewLifecycleOwner,
             Observer {
                 if(!it.isNullOrEmpty()) {
-                    menuAdapter.submitList(it)
                     menuPositionAdapter.submitList(it)
                 }
 
             })
+        viewModel.offers.observe(viewLifecycleOwner){
+            if(!it.isNullOrEmpty()) {
+                menuAdapter.submitList(it)
+            }
+        }
         viewModel.loadMenuPositions()
+        viewModel.loadOffers()
     }
 
     override fun loadImage(url: String, view: ImageView) {

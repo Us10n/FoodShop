@@ -15,29 +15,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/title"
+        <ImageView
+            android:id="@+id/image"
             android:layout_width="187dp"
             android:layout_height="104dp"
-            android:gravity="center_horizontal"
-            android:paddingTop="8dp"
-            android:text="Title:"
-            android:textColor="@color/black"
-            android:textSize="24dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/bookTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:paddingTop="8dp"
-            android:text=" "
-            android:textColor="@color/black"
-            android:textSize="24dp"
-            app:layout_constraintLeft_toRightOf="@id/title"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

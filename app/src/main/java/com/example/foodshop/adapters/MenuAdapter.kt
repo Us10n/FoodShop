@@ -4,11 +4,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import com.example.foodshop.databinding.ItemBinding
-import com.example.foodshop.recycler.MenuDiffCallback
-import com.example.foodshop.database.FoodPosition
 import com.example.foodshop.recycler.MenuViewHolder
+import com.example.foodshop.recycler.OfferMenuDiffCallback
+import com.example.foodshop.recycler.OfferPosition
 
-class MenuAdapter: ListAdapter<FoodPosition, MenuViewHolder>(MenuDiffCallback()){
+class MenuAdapter : ListAdapter<OfferPosition, MenuViewHolder>(OfferMenuDiffCallback()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MenuViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding = ItemBinding.inflate(layoutInflater, parent, false)

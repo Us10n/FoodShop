@@ -32,7 +32,7 @@ class VerificationManager(
             }
 
             override fun onVerificationCompleted(phoneAuthCredential: PhoneAuthCredential) {
-                signInWithPhoneAuthCredential(phoneAuthCredential, null)
+//                signInWithPhoneAuthCredential(phoneAuthCredential, null)
             }
 
             override fun onVerificationFailed(e: FirebaseException) {

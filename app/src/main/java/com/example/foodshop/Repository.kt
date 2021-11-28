@@ -24,16 +24,16 @@ class Repository {
         return database.loadMenuPositions(myCallBack)
     }
 
-    fun loadAccount(mac: String, myCallBack: AccountCallBack) {
-        return database.loadAccount(mac, myCallBack)
+    fun loadAccount(number: String, myCallBack: AccountCallBack) {
+        return database.loadAccount(number, myCallBack)
     }
 
-    fun loadAccountHistory(mac: String, myCallBack: AccountHistoryCallBack) {
-        database.loadAccountHistory(mac, myCallBack)
+    fun loadAccountHistory(accountId: String, myCallBack: AccountHistoryCallBack) {
+        database.loadAccountHistory(accountId, myCallBack)
     }
 
-    fun addSession(mac: String) {
-        return database.addSession(mac)
+    fun addSession(mac: String, number: String) {
+        return database.addSession(mac, number)
     }
 
     fun loadDeviceAuthStatus(mac: String, myCallBack: DeviceStatusCallBack) {
@@ -69,6 +69,10 @@ class Repository {
     }
 
     fun deleteSession(mac: String, callBack: DeleteSessionCallBack) {
-        database.deleteSession(mac,callBack)
+        database.deleteSession(mac, callBack)
+    }
+
+    fun updateAccount(accountId: String, account: Account) {
+        database.updateAccount(accountId, account)
     }
 }

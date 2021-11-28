@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.foodshop.MainActivity
 import com.example.foodshop.Repository
+import com.example.foodshop.callback.AccountCallBack
 import com.example.foodshop.callback.AuthCallBack
 import com.example.foodshop.callback.DeviceStatusCallBack
 import com.example.foodshop.database.Account
@@ -16,11 +17,14 @@ import kotlinx.coroutines.launch
 
 class EntryFragmentViewModel(private val repository: Repository) : ViewModel() {
 
-    lateinit var manager: VerificationManager
+    private lateinit var manager: VerificationManager
 
     private val isSignSuccessfulLiveData: MutableLiveData<Boolean> = MutableLiveData()
     val isSignSuccessful: LiveData<Boolean>
         get() = isSignSuccessfulLiveData
+    private val liveAccount: MutableLiveData<Account> = MutableLiveData()
+    val account: LiveData<Account>
+        get() = liveAccount
     private val isAuthorizedLiveData: MutableLiveData<Boolean> = MutableLiveData()
     val isAuthorized: LiveData<Boolean>
         get() = isAuthorizedLiveData
@@ -59,15 +63,26 @@ class EntryFragmentViewModel(private val repository: Repository) : ViewModel() {
         return repository.getDeviceMacAddress(context)
     }
 
-    fun addSession(mac: String) {
+    fun addSession(mac: String, number: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            repository.addSession(mac)
+            repository.addSession(mac, number)
         }
     }
 
     fun addUser(account: Account) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.addAccount(account)
+        }
+    }
+
+    fun loadAccount(phone: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.loadAccount(phone, object : AccountCallBack {
+                override fun onCallBack(account: Account) {
+                    liveAccount.postValue(account)
+                }
+            })
+
         }
     }
 }

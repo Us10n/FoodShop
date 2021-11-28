@@ -27,9 +27,9 @@ class AccountFragmentViewModel(private val repository: Repository) : ViewModel()
         repository.loadImage(url, view)
     }
 
-    fun loadAccount(uid: String) {
+    fun loadAccount(phone: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            repository.loadAccount(uid, object : AccountCallBack {
+            repository.loadAccount(phone, object : AccountCallBack {
                 override fun onCallBack(account: Account) {
                     liveAccount.postValue(account)
                 }
@@ -37,9 +37,9 @@ class AccountFragmentViewModel(private val repository: Repository) : ViewModel()
         }
     }
 
-    fun loadAccountHistory(mac: String) {
+    fun loadAccountHistory(accountId: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            repository.loadAccountHistory(mac, object : AccountHistoryCallBack {
+            repository.loadAccountHistory(accountId, object : AccountHistoryCallBack {
                 override fun onCallback(historyList: List<HistoryPosition>) {
                     liveAccountHistoryData.postValue(historyList)
                 }
@@ -50,6 +50,12 @@ class AccountFragmentViewModel(private val repository: Repository) : ViewModel()
     fun deleteSession(mac: String, callBack: DeleteSessionCallBack) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.deleteSession(mac,callBack)
+        }
+    }
+
+    fun updateAccount(accountId: String, account: Account) {
+        viewModelScope.launch(Dispatchers.IO){
+            repository.updateAccount(accountId,account)
         }
     }
 }

@@ -12,6 +12,7 @@ import androidx.lifecycle.Observer
 import com.example.foodshop.CurrentUser
 import com.example.foodshop.MainActivity
 import com.example.foodshop.ShavaApplication
+import com.example.foodshop.database.Account
 import com.example.foodshop.databinding.AutificationBinding
 import com.example.foodshop.databinding.CodeWindowBinding
 import com.example.foodshop.databinding.RegistrationWindowBinding
@@ -35,27 +36,36 @@ class EntryFragment : Fragment() {
 
         val macAddress = viewModel.getDeviceMacAddress(requireContext())
         CurrentUser.account.mac = macAddress
-        viewModel.isAuthorized.observe(viewLifecycleOwner, Observer {
+        viewModel.isAuthorized.observe(viewLifecycleOwner, {
             if (it) {
-                openMainFragment()
+                loadAccount(CurrentUser.account.phone)
             }
         })
-        viewModel.getAuthorizationStatus(macAddress)
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        viewModel.account.observe(viewLifecycleOwner) {
+            if (it.imgUrl.isNotBlank()) {
+                CurrentUser.account.name = it.name
+                CurrentUser.account.imgUrl = it.imgUrl
+                CurrentUser.account.phone = it.phone
+                openMainFragment()
+            }
+        }
         viewModel.isSignSuccessful.observe(viewLifecycleOwner) {
             if (it) {
-                addSession(CurrentUser.account.mac)
-                addUser()
+                addSession(CurrentUser.account.mac, CurrentUser.account.phone)
+                addUser(CurrentUser.account)
                 openMainFragment()
             } else Toast.makeText(requireContext(), "verification failed", Toast.LENGTH_LONG)
                 .show()
         }
-        binding.signIn.setOnClickListener {
-            openMainFragment()
-        }
+        viewModel.getAuthorizationStatus(macAddress)
+        return binding.root
+    }
+
+    private fun loadAccount(phone: String) {
+        viewModel.loadAccount(phone)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         viewModel.initManager(activity as MainActivity)
         binding.registration.setOnClickListener {
             val dialog = AlertDialog.Builder(requireContext())
@@ -104,11 +114,11 @@ class EntryFragment : Fragment() {
         (activity as MainActivity).openMainFragment()
     }
 
-    private fun addSession(mac: String) {
-        viewModel.addSession(mac)
+    private fun addSession(mac: String, number: String) {
+        viewModel.addSession(mac, number)
     }
 
-    private fun addUser() {
-        viewModel.addUser(CurrentUser.account)
+    private fun addUser(account: Account) {
+        viewModel.addUser(account)
     }
 }

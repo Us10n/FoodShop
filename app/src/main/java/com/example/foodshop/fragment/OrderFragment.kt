@@ -70,7 +70,7 @@ class OrderFragment : Fragment() {
         binding.sendOrder.setOnClickListener {
             if (!binding.name.text.isEmpty() && !binding.number.text.isEmpty()) {
                 val order = HistoryPosition(
-                    CurrentUser.account.mac,
+                    CurrentUser.accountId,
                     (fullPrice / 5.0).toString(),
                     binding.comment.text.toString()
                 )

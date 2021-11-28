@@ -20,8 +20,6 @@ class Database {
         }
         Picasso.get()
             .load(url)
-//            .resize(view.maxWidth, view.maxHeight)
-//            .centerCrop()
             .error(R.drawable.ic_baseline_account_circle_24)
             .into(view)
     }
@@ -34,6 +32,8 @@ class Database {
                 val documents = result.documents
                 if (!documents.isNullOrEmpty()) {
                     CurrentUser.sessionId = documents[0].id
+                    var sessionResponse = documents[0].toObject<SessionResponse>()
+                    CurrentUser.account.phone = sessionResponse!!.number
                 }
                 myCallBack.onCallback(!documents.isNullOrEmpty())
             }
@@ -43,9 +43,9 @@ class Database {
             }
     }
 
-    fun loadAccount(mac: String, myCallBack: AccountCallBack) {
+    fun loadAccount(number: String, myCallBack: AccountCallBack) {
         val db = FirebaseFirestore.getInstance()
-        db.collection("user").whereEqualTo("mac", mac)
+        db.collection("user").whereEqualTo("phone", number)
             .get()
             .addOnSuccessListener { result ->
                 val documents = result.documents
@@ -62,9 +62,9 @@ class Database {
             }
     }
 
-    fun loadAccountHistory(mac: String, myCallBack: AccountHistoryCallBack) {
+    fun loadAccountHistory(accountId: String, myCallBack: AccountHistoryCallBack) {
         val db = FirebaseFirestore.getInstance()
-        db.collection("order").whereEqualTo("mac", mac)
+        db.collection("order").whereEqualTo("uid", accountId)
             .get()
             .addOnSuccessListener { result ->
                 val list = mutableListOf<HistoryPosition>()
@@ -79,9 +79,10 @@ class Database {
             }
     }
 
-    fun addSession(mac: String) {
+    fun addSession(mac: String, number: String) {
         val map = hashMapOf<String, String>()
         map["mac"] = mac
+        map["number"] = number
         val db = FirebaseFirestore.getInstance()
         db.collection("session")
             .add(map)
@@ -97,12 +98,22 @@ class Database {
 
     fun uploadAccount(account: Account) {
         val db = FirebaseFirestore.getInstance()
-
-        db.collection("user")
-            .add(account)
-            .addOnFailureListener {
-                Log.d("mine", "Error upload account")
-                throw Exception("Database upload", it)
+        db.collection("user").whereEqualTo("phone", account.phone)
+            .get()
+            .addOnSuccessListener {
+                if (it.documents.isEmpty()) {
+                    db.collection("user")
+                        .add(account)
+                        .addOnSuccessListener {
+                            CurrentUser.accountId = it.id
+                        }
+                        .addOnFailureListener {
+                            Log.d("mine", "Error upload account")
+                            throw Exception("Database upload", it)
+                        }
+                } else {
+                    CurrentUser.accountId = it.documents[0].id
+                }
             }
     }
 
@@ -166,6 +177,13 @@ class Database {
                 Log.d("mine", "Error upload order")
                 throw Exception("Database upload", it)
             }
+    }
+
+    fun updateAccount(accountId: String, account: Account) {
+        val db = FirebaseFirestore.getInstance()
+        val map = HashMap<String, Any>()
+        map["name"] = account.name
+        db.collection("user").document(accountId).update(map)
     }
 
 }

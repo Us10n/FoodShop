@@ -1,7 +1,7 @@
 package com.example.foodshop.recycler
 
 data class HistoryPosition(
-    val mac:String="",
+    val uid:String="",
     val cashback: String="",
     val body: String=""
 )

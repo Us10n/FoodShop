@@ -72,11 +72,11 @@ class AccountFragment : Fragment() {
     }
 
     private fun loadAccountInfo() {
-        viewModel.loadAccount(CurrentUser.account.mac)
+        viewModel.loadAccount(CurrentUser.account.phone)
     }
 
     private fun loadAccountHistory() {
-        viewModel.loadAccountHistory(CurrentUser.account.mac)
+        viewModel.loadAccountHistory(CurrentUser.accountId)
     }
 
     private fun openNameWindow() {
@@ -91,6 +91,8 @@ class AccountFragment : Fragment() {
         { _, _ ->
             if (codeBinding.codeField.text.toString().isNotBlank()) {
                 binding.accountName.text = codeBinding.codeField.text
+                CurrentUser.account.name = codeBinding.codeField.text.toString()
+                updateProfile()
             } else {
                 Toast.makeText(requireContext(), "field is empty", Toast.LENGTH_LONG).show()
             }
@@ -104,5 +106,9 @@ class AccountFragment : Fragment() {
 
     private fun openEntryFragment() {
         (activity as MainActivity).openEntryFragment()
+    }
+
+    private fun updateProfile() {
+        viewModel.updateAccount(CurrentUser.accountId, CurrentUser.account)
     }
 }
